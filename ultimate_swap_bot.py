@@ -112,7 +112,7 @@ def run_swap_cycle(w3, account):
     swap_target = random.randint(config.MIN_SWAP_COUNT, config.MAX_SWAP_COUNT)
     log_message(f"Memulai SIKLUS SWAP, menargetkan {swap_target} transaksi.")
     for i in range(swap_target):
-        log_message(f"--- Memproses Swap
+        log_message(f"--- Memproses Swap #{i+1}/{swap_target} ---")
         
         eth_balance = w3.eth.get_balance(account.address)
         if eth_balance < w3.to_wei(config.MIN_ETH_BALANCE_THRESHOLD, 'ether'):
