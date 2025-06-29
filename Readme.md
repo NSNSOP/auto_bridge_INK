@@ -25,54 +25,33 @@ The bot includes safety features, such as a minimum balance threshold, to preven
 
 Follow these steps to set up and run the bot in a clean environment.
 
-```bash
+
 git clone https://github.com/NSNSOP/auto_bridge_INK
-cd auto_bridge_INK'''
+cd auto_bridge_INK
 
-**1. Create a Virtual Environment**
-It is highly recommended to run the bot in a dedicated virtual environment.
-# Create the virtual environment folder
-```bash
-python3 -m venv venv'''
+1. Clone the Repository
+git clone https://github.com/NSNSOP/auto_bridge_INK
+cd auto_bridge_INK
 
-# Activate the environment (on Linux/macOS)
-```bash
-source venv/bin/activate'''
+2. Set Up Environment
+# Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate
 
-2. Install Dependencies
+# Install required packages
+pip install -r requirements.txt
 
-Install all the required Python libraries using the requirements.txt file.
-```bash
-pip install -r requirements.txt'''
+3. Configure Your Wallet
+Edit the config.py file and add your private key.
+nano config.py
 
-3. Configure the Bot
+EDIT PRIVATE_KEY = "0xYourActualPrivateKeyGoesHere"
 
-All settings are managed in the config.py file.
-Open the config.py file with a text editor.
-IMPORTANT: You must replace the placeholder 0xPrivatekeyHere with your actual wallet private key. The bot will not run without it.
+4. Run the Bot
+screen -S ink_auto_bridge
 
-# config.py
-PRIVATE_KEY = "0xYourActualPrivateKeyGoesHere"
-Adjust other parameters like MIN_ETH_AMOUNT, MAX_SWAP_COUNT, TOKEN_LIST, etc., to fit your strategy.
 
-Running the Bot
-Once the setup is complete, you can run the bot with the following command:
-```bash
-python3 auto_bridge.py'''
-The bot will start running and log all its actions to the terminal with timestamps.
-
-Running as a Background Process
-For long-term, continuous operation (e.g., on a server), it is recommended to run the script using a terminal multiplexer like screen or tmux. This ensures the bot keeps running even after you close the terminal.
-
-Example using screen:
-
-# Start a new screen session named 'swapbot'
-```bash
-screen -S swapbot'''
-
-# Run the bot inside the new session
-```bash
-python3 auto_bridge.py'''
+python3 auto_bridge.py
 
 # Detach from the session by pressing Ctrl+A then D. The bot will keep running.
 # To re-attach to the session later, use: screen -r swapbot
