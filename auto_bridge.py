@@ -146,7 +146,7 @@ def run_swap_cycle(w3, account):
 def main():
     """Fungsi utama untuk menjalankan siklus bot tanpa henti."""
     log_message("="*40)
-    log_message("   Memulai Ultimate Swap Bot v2")
+    log_message("   Memulai Auto SWAP")
     log_message("="*40)
     w3, account = setup()
     if not (w3 and account):
