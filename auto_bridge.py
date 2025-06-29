@@ -14,7 +14,7 @@ def setup():
         log_message("ERROR: ERROR: Failed to connect to Web3 provider.")
         return None, None
     try:
-        account = w3.eth.account.from_toy(config.PRIVATE_KEY)
+        account = w3.eth.account.from_key(config.PRIVATE_KEY)
         return w3, account
     except Exception as e:
         log_message(f"ERROR: ERROR: Failed to load wallet. Periksa config.py. Detail: {e}")
