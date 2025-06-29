@@ -25,6 +25,7 @@ The bot includes safety features, such as a minimum balance threshold, to preven
 
 Follow these steps to set up and run the bot in a clean environment.
 
+```bash
 git clone https://github.com/NSNSOP/auto_bridge_INK
 cd auto_bridge_INK
 
@@ -32,7 +33,7 @@ cd auto_bridge_INK
 
 It is highly recommended to run the bot in a dedicated virtual environment.
 
-```bash
+
 # Create the virtual environment folder
 python3 -m venv venv
 
