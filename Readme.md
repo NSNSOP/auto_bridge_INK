@@ -1,3 +1,6 @@
+git clone https://github.com/NSNSOP/auto_bridge_INK
+cd auto_bridge_INK
+
 # Automated Swap & Rebalancing Bot
 
 ## Description
