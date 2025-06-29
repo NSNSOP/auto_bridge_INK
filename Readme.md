@@ -27,35 +27,29 @@ Follow these steps to set up and run the bot in a clean environment.
 
 ```bash
 git clone https://github.com/NSNSOP/auto_bridge_INK
-cd auto_bridge_INK
+cd auto_bridge_INK'''
 
 **1. Create a Virtual Environment**
-
 It is highly recommended to run the bot in a dedicated virtual environment.
-
-
 # Create the virtual environment folder
-python3 -m venv venv
+```bash
+python3 -m venv venv'''
 
 # Activate the environment (on Linux/macOS)
-source venv/bin/activate
+```bash
+source venv/bin/activate'''
 
 2. Install Dependencies
 
 Install all the required Python libraries using the requirements.txt file.
+```bash
+pip install -r requirements.txt'''
 
-Bash
-
-pip install -r requirements.txt
 3. Configure the Bot
 
 All settings are managed in the config.py file.
-
 Open the config.py file with a text editor.
-
 IMPORTANT: You must replace the placeholder 0xPrivatekeyHere with your actual wallet private key. The bot will not run without it.
-
-Python
 
 # config.py
 PRIVATE_KEY = "0xYourActualPrivateKeyGoesHere"
@@ -63,25 +57,22 @@ Adjust other parameters like MIN_ETH_AMOUNT, MAX_SWAP_COUNT, TOKEN_LIST, etc., t
 
 Running the Bot
 Once the setup is complete, you can run the bot with the following command:
-
-Bash
-
-python3 auto_bridge.py
+```bash
+python3 auto_bridge.py'''
 The bot will start running and log all its actions to the terminal with timestamps.
 
 Running as a Background Process
-
 For long-term, continuous operation (e.g., on a server), it is recommended to run the script using a terminal multiplexer like screen or tmux. This ensures the bot keeps running even after you close the terminal.
 
 Example using screen:
 
-Bash
-
 # Start a new screen session named 'swapbot'
-screen -S swapbot
+```bash
+screen -S swapbot'''
 
 # Run the bot inside the new session
-python3 auto_bridge.py
+```bash
+python3 auto_bridge.py'''
 
 # Detach from the session by pressing Ctrl+A then D. The bot will keep running.
 # To re-attach to the session later, use: screen -r swapbot
