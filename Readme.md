@@ -85,5 +85,3 @@ python3 auto_bridge.py
 RISK OF LOSS: This is an automated trading bot that interacts with real cryptocurrency. Bugs, configuration errors, or market volatility can lead to financial loss. Use it at your own risk.
 
 SECURITY: Your private key gives full control over your wallet. Handle the config.py file with extreme care and never share it or commit it to a public repository. It is highly recommended to use a new, dedicated wallet for this bot with a limited amount of funds.
-
-TESTNET FIRST: Always test the bot extensively on a testnet before deploying it on a mainnet with real funds.
