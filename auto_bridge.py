@@ -1,11 +1,10 @@
-# ultimate_swap_bot.py - Versi Final dengan Rebalance Cerdas
 import time
 import random
 import json
 from datetime import datetime
 from web3 import Web3
 import requests
-import config # Pastikan config.py Anda ada dan terisi benar
+import config
 
 def setup():
     """Mempersiapkan koneksi Web3 dan memuat akun dari private key."""
@@ -43,9 +42,8 @@ def get_api_quote(w3, from_token, to_token, amount_in_wei, user_address, is_reve
         quote_data = response.json()
         
         if is_reversal:
-            return quote_data.get('steps', []) # Kembalikan semua langkah untuk reversal
+            return quote_data.get('steps', [])
 
-        # Untuk swap normal (ETH -> Token), cukup ambil langkah pertama
         return [quote_data['steps'][0]]
         
     except Exception as e:
@@ -105,7 +103,6 @@ def get_token_balance(w3, account, token_info):
     token_contract = w3.eth.contract(address=Web3.to_checksum_address(token_info['address']), abi=config.ERC20_ABI)
     return token_contract.functions.balanceOf(account.address).call()
 
-# --- FUNGSI REBALANCE YANG BARU DAN CERDAS ---
 def trigger_emergency_rebalance(w3, account):
     """
     Mencoba menjual SEMUA saldo dari SATU token (non-WETH) untuk mengisi ulang ETH.
@@ -113,7 +110,6 @@ def trigger_emergency_rebalance(w3, account):
     """
     log_message("!!! MEMULAI PROSES ISI ULANG ETH DARURAT !!!")
     
-    # Mencari token yang bisa dijual, dimulai dari yang ada di list
     for symbol, info in config.TOKEN_LIST.items():
         if symbol == 'WETH':
             continue
@@ -123,7 +119,6 @@ def trigger_emergency_rebalance(w3, account):
             human_readable_balance = balance_wei / (10**info['decimals'])
             log_message(f"-> Target Rebalance: Mencoba menjual {human_readable_balance:.6f} {symbol}...")
             
-            # Meminta rencana transaksi lengkap dari API
             transaction_steps = get_api_quote(
                 w3, info['address'], "0x0000000000000000000000000000000000000000",
                 balance_wei, account.address, is_reversal=True
@@ -147,14 +142,12 @@ def trigger_emergency_rebalance(w3, account):
                     log_message("   Jeda sejenak sebelum langkah berikutnya...")
                     time.sleep(15)
 
-            # Jika semua langkah untuk token ini berhasil, kita selesai.
             if all_steps_succeeded:
                 log_message(f"Isi ulang ETH berhasil dengan menjual {symbol}.")
                 return True
             else:
                 log_message(f"Gagal menjual {symbol}. Mencoba token berikutnya jika ada.")
     
-    # Jika loop selesai dan tidak ada token yang berhasil dijual
     log_message("Tidak ada token yang bisa dijual untuk mengisi ulang ETH setelah mencoba semua opsi.")
     return False
 
@@ -181,7 +174,6 @@ def run_swap_cycle(w3, account):
             else:
                 log_message("Isi ulang berhasil, melanjutkan siklus.")
         
-        # Logika swap ETH -> Token tetap sama
         target_symbol = random.choice(list(config.TOKEN_LIST.keys()))
         amount_to_swap = random.uniform(config.MIN_ETH_AMOUNT, config.MAX_ETH_AMOUNT)
         amount_wei = w3.to_wei(amount_to_swap, 'ether')
